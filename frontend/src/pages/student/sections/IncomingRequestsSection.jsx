@@ -126,15 +126,13 @@ rescheduleReason:
 }
 
 function IncomingRequestsSection({
-  requests,
   onToast,
-  onRequestUpdated,
   notificationTargetId,
+  onRequestUpdated,
   onViewProduct,
-
 }) {
   
- // const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
   const [actingId, setActingId] = useState(null);

@@ -5,7 +5,7 @@ import Auth from "./pages/Auth/Auth";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";
 import StudentDashboard from "./pages/student/StudentDashboard";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 function App() {
   return (

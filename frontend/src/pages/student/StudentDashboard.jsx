@@ -541,15 +541,14 @@ const loadIncomingRequests =
 
     } catch (error) {
 
-  console.error(
-    "Failed to load incoming requests:",
-    error.response?.status,
-    error.response?.data || error.message
-  );
+      console.error(
+        "Failed to load incoming requests:",
+        error
+      );
 
-  return [];
+      return [];
 
-}
+    }
 
   }, []);
 
@@ -957,6 +956,13 @@ const loadMyProducts =
   
 const createOutgoingRequest = async (product, offeredProduct) => {
   try {
+    // CONFIRMED against RequestServiceImpl.addRequest() — the backend
+    // maps product type -> the only allowed request type:
+    //   Sell product     -> "BUY"     ("Sell products can only receive BUY requests")
+    //   Exchange product -> "EXCHANGE"
+    //   Donate product   -> "DONATE"
+    // It's a plain String on CreateRequestRequest (not an enum), and
+    // defaults to "BUY" server-side when blank.
     let requestType = "BUY";
 
     if (product.type === "Exchange") {
@@ -1643,10 +1649,9 @@ const handleMarkAllNotificationsAsRead = async () => {
             recommendations={recommendations}
           />
         );
- case "incomingRequests":
+  case "incomingRequests":
   return (
     <IncomingRequestsSection
-      requests={incomingRequests}
       onToast={showToast}
 
       notificationTargetId={
@@ -1666,7 +1671,7 @@ const handleMarkAllNotificationsAsRead = async () => {
       }}
     />
   );
-  case "notifications":
+     case "notifications":
   return (
     <NotificationsSection
       notifications={notifications}
